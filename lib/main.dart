@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 import 'screens/tela_inicial.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'screens/tela_setores.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+
+  await Hive.openBox('checklistBox');
+  await Hive.openBox('relatoriosBox');
+
   runApp(const MeuAppNR());
 }
 
@@ -14,7 +22,7 @@ class MeuAppNR extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'App NR',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const TelaInicial(),
+      home: const TelaSetores(),
     );
   }
 }

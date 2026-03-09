@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/checklist_item.dart';
+import 'tela_relatorios.dart';
+import 'tela_checklist.dart';
 
 class TelaInicial extends StatefulWidget {
   const TelaInicial({super.key});
@@ -9,6 +11,8 @@ class TelaInicial extends StatefulWidget {
 }
 
 class _TelaInicialState extends State<TelaInicial> {
+  final List<String> setores = ['Enfermaria', 'Almoxarifado', 'Lavanderia'];
+
   final List<ChecklistItem> itens = [
     ChecklistItem(titulo: 'Sinalização adequada'),
     ChecklistItem(titulo: 'Extintores dentro da validade'),
@@ -18,18 +22,34 @@ class _TelaInicialState extends State<TelaInicial> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Checklist NR')),
+      appBar: AppBar(
+        title: const Text('Setores'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.assignment),
+            tooltip: 'Relatórios',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const TelaRelatorios()),
+              );
+            },
+          ),
+        ],
+      ),
       body: ListView.builder(
-        itemCount: itens.length,
+        itemCount: setores.length,
         itemBuilder: (context, index) {
-          final item = itens[index];
-          return CheckboxListTile(
-            title: Text(item.titulo),
-            value: item.concluido,
-            onChanged: (value) {
-              setState(() {
-                item.concluido = value ?? false;
-              });
+          return ListTile(
+            title: Text(setores[index]),
+            trailing: const Icon(Icons.arrow_forward),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => TelaChecklist(nomeSetor: setores[index]),
+                ),
+              );
             },
           );
         },
