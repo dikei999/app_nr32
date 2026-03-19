@@ -1,0 +1,24 @@
+[
+  {
+    "id": "demo-001",
+    "nr32_section": "NR-32 - 32.2",
+    "item_description": "Disponibilidade de EPIs adequados para a atividade (luvas, máscara, avental).",
+    "is_required_photo": true,
+    "order": 1
+  },
+  {
+    "id": "demo-002",
+    "nr32_section": "NR-32 - 32.3",
+    "item_description": "Descarte correto de resíduos (infectantes, perfurocortantes, químicos).",
+    "is_required_photo": false,
+    "order": 2
+  },
+  {
+    "id": "demo-003",
+    "nr32_section": "NR-32 - 32.4",
+    "item_description": "Sinalização e disponibilidade de lavatórios/pontos de higienização das mãos.",
+    "is_required_photo": true,
+    "order": 3
+  }
+]
+

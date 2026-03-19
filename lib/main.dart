@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'screens/tela_inicial.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'screens/tela_setores.dart';
+
+import 'core/constants.dart';
+import 'core/supabase_client.dart';
+import 'core/theme.dart';
+import 'features/auth/login_screen.dart';
+import 'services/demo_mode_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Hive.initFlutter();
-
-  await Hive.openBox('checklistBox');
-  await Hive.openBox('relatoriosBox');
+  final demoEnabled = await DemoModeService.isEnabled();
+  if (!demoEnabled) {
+    await SupabaseConfig.initialize();
+  }
 
   runApp(const MeuAppNR());
 }
@@ -20,9 +23,9 @@ class MeuAppNR extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'App NR',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: const TelaSetores(),
+      title: AppConstants.appName,
+      theme: AppTheme.light(),
+      home: const LoginScreen(),
     );
   }
 }
